@@ -14,7 +14,7 @@ $Config = @{
     SmtpPort          = 587
     EmailFrom         = "YukiiKazunomiya@gmail.com"
     EmailTo           = "YukiiKazunomiya@gmail.com"
-    EmailPassword     = "0650 3236 7680 7606"
+    EmailPassword     = ""
 
     # Konfigurasi Auto Update Software
     AutoUpdateEnabled = $true
