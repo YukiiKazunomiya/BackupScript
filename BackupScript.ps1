@@ -1,3 +1,9 @@
+# ╔════════════════════════════════════════════════════════════╗
+# ║        BACKUP & MAINTENANCE AUTOMATION SYSTEM v1.0         ║
+# ║        Created & Modified By: YukiiKazunomiya ♡            ║
+# ║        Date: November 2025                                 ║
+# ╚════════════════════════════════════════════════════════════╝
+
 # ============================================
 # KONFIGURASI UTAMA - EDIT SESUAI KEBUTUHAN
 # ============================================
@@ -25,6 +31,15 @@ $Config = @{
     LogRetentionDays  = 90
 }
 
+# ============================================
+# WATERMARK
+# ============================================
+function Show-Watermark {
+    Write-Host "`n───────────────────────────────────────────────" -ForegroundColor Magenta
+    Write-Host "💾  Backup & Maintenance System" -ForegroundColor Cyan
+    Write-Host "📜  Version 1.0 - © 2025 By YukiiKazunomiya 💖" -ForegroundColor Magenta
+    Write-Host "───────────────────────────────────────────────`n" -ForegroundColor Magenta
+}
 
 # ============================================
 # FUNGSI-FUNGSI UTAMA
@@ -193,11 +208,7 @@ function Show-Configuration {
 # MAIN PROGRAM
 # ============================================
 
-Write-Host "`n╔════════════════════════════════════════════════════╗" -ForegroundColor Cyan
-Write-Host "║   BACKUP & MAINTENANCE AUTOMATION SYSTEM          ║" -ForegroundColor Cyan
-Write-Host "║   Version 1.0 - November 2025                     ║" -ForegroundColor Cyan
-Write-Host "╚════════════════════════════════════════════════════╝`n" -ForegroundColor Cyan
-
+Show-Watermark
 Show-Configuration
 $BackupSuccess = Start-BackupProcess
 Remove-OldBackups
@@ -207,5 +218,6 @@ Update-Software
 Write-Log "======== PROSES SELESAI ========" -Level 'SUCCESS'
 Write-Host ""
 Write-Host "[INFO] Backup process completed! Check log file untuk detail lengkap." -ForegroundColor Green
-
-
+Write-Host "`n───────────────────────────────────────────────"
+Write-Host "Script completed successfully!  © By YukiiKazunomiya 💫"
+Write-Host "───────────────────────────────────────────────`n"
