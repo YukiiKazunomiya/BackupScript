@@ -1,6 +1,6 @@
 # ╔════════════════════════════════════════════════════════════╗
 # ║        BACKUP & MAINTENANCE AUTOMATION SYSTEM v1.0         ║
-# ║        Created & Modified By: YukiiKazunomiya ♡            ║
+# ║        Created & Modified By: YukiiKazunomiya              ║
 # ║        Date: November 2025                                 ║
 # ╚════════════════════════════════════════════════════════════╝
 
@@ -18,9 +18,9 @@ $Config = @{
     EmailEnabled      = $true
     SmtpServer        = "smtp.gmail.com"
     SmtpPort          = 587
-    EmailFrom         = "YukiiKazunomiya@gmail.com"
-    EmailTo           = "YukiiKazunomiya@gmail.com"
-    EmailPassword     = ""
+    EmailFrom         = "gibrank428@gmail.com"
+    EmailTo           = "euphylliasama@gmail.com"
+    EmailPassword     = "gurjldtolxbwyxsd"
 
     # Konfigurasi Auto Update Software
     AutoUpdateEnabled = $true
@@ -37,7 +37,7 @@ $Config = @{
 function Show-Watermark {
     Write-Host "`n───────────────────────────────────────────────" -ForegroundColor Magenta
     Write-Host "💾  Backup & Maintenance System" -ForegroundColor Cyan
-    Write-Host "📜  Version 1.0 - © 2025 By YukiiKazunomiya 💖" -ForegroundColor Magenta
+    Write-Host "📜  Version 1.0 - © 2025 By YukiiKazunomiya " -ForegroundColor Magenta
     Write-Host "───────────────────────────────────────────────`n" -ForegroundColor Magenta
 }
 
@@ -111,6 +111,44 @@ function Start-BackupProcess {
     catch {
         Write-Log "ERROR saat backup: $($_.Exception.Message)" -Level ERROR
         return $false
+    }
+}
+
+function Send-NotificationEmail {
+    param(
+        [string]$Subject,
+        [string]$Body,
+        [string]$AttachmentPath = $null
+    )
+
+    if (-not $Config.EmailEnabled) {
+        Write-Log "Email notifikasi DISABLED, tidak mengirim email." -Level WARNING
+        return
+    }
+
+    try {
+        $smtp = New-Object System.Net.Mail.SmtpClient($Config.SmtpServer, $Config.SmtpPort)
+        $smtp.EnableSsl = $true
+        $smtp.Credentials = New-Object System.Net.NetworkCredential($Config.EmailFrom, $Config.EmailPassword)
+
+        $mail = New-Object System.Net.Mail.MailMessage
+        $mail.From = $Config.EmailFrom
+        $mail.To.Add($Config.EmailTo)
+        $mail.Subject = $Subject
+        $mail.Body = $Body
+
+        # Tambahkan lampiran jika ada
+        if ($AttachmentPath -and (Test-Path $AttachmentPath)) {
+            $mail.Attachments.Add((New-Object System.Net.Mail.Attachment($AttachmentPath)))
+            Write-Log "Lampiran ditambahkan: $AttachmentPath" -Level INFO
+        }
+
+        $smtp.Send($mail)
+	$mail.Dispose()   # lepaskan file attachment agar tidak terkunci
+        Write-Log "Email notifikasi berhasil dikirim ke $($Config.EmailTo)" -Level SUCCESS
+    }
+    catch {
+        Write-Log "ERROR saat mengirim email: $($_.Exception.Message)" -Level ERROR
     }
 }
 
@@ -214,6 +252,30 @@ $BackupSuccess = Start-BackupProcess
 Remove-OldBackups
 Remove-OldLogs
 Update-Software
+
+if ($BackupSuccess) {
+    # Ambil file ZIP backup terbaru
+    $LatestZip = Get-ChildItem -Path $Config.BackupDestination -Filter "Backup_*.zip" |
+                 Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+    # Ambil log terbaru
+   $LatestLog = Get-ChildItem -Path $Config.LogFolder -Filter "Backup_*.log" |
+             Sort-Object LastWriteTime -Descending | Select-Object -First 1
+	$LogCopy = "$($LatestLog.FullName).copy"
+	Copy-Item $LatestLog.FullName $LogCopy -Force
+	Send-NotificationEmail -Subject "Backup Sukses" -Body "Backup berhasil." -AttachmentPath $LogCopy
+
+    # Kirim email dengan lampiran ZIP + log
+    $attachments = @()
+if ($LatestZip) { $attachments += $LatestZip.FullName }
+if ($LogCopy)   { $attachments += $LogCopy }   # pakai copy, bukan asli
+
+    foreach ($file in $attachments) {
+        Send-NotificationEmail -Subject "Backup Sukses" -Body "Backup berhasil dibuat pada $(Get-Date)." -AttachmentPath $file
+    }
+} else {
+    Send-NotificationEmail -Subject "Backup Gagal" -Body "Backup gagal pada $(Get-Date). Cek log untuk detail."
+}
 
 Write-Log "======== PROSES SELESAI ========" -Level 'SUCCESS'
 Write-Host ""
