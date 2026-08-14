@@ -34,16 +34,16 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 | Feature | Description |
 |---------|-------------|
-| 📂 **Auto-detect folders** | Automatically backup Documents, Desktop, Pictures, Downloads, Videos |
-| 🗜️ **ZIP Compression** | Compressed output to save disk space |
-| 📧 **Email Notifications** | Send backup reports + ZIP/log attachments via Gmail |
-| 🗑️ **Auto cleanup** | Automatically delete old backups & logs |
-| ⚙️ **Software Updates** | Update applications via Chocolatey (optional) |
-| 📊 **Detailed Summary** | Statistics report: file count, size, duration, errors |
-| 📋 **Comprehensive Logging** | All activities are recorded to a daily log file |
-| ⏰ **Task Scheduler** | Setup daily/weekly/monthly automated backups |
-| 🛡️ **Error Handling** | Handles errors gracefully without crashing |
-| 🖥️ **Multi-PC** | Suitable for office PCs, personal laptops, or servers |
+|  **Auto-detect folders** | Automatically backup Documents, Desktop, Pictures, Downloads, Videos |
+|  **ZIP Compression** | Compressed output to save disk space |
+|  **Email Notifications** | Send backup reports + ZIP/log attachments via Gmail |
+|  **Auto cleanup** | Automatically delete old backups & logs |
+|  **Software Updates** | Update applications via Chocolatey (optional) |
+|  **Detailed Summary** | Statistics report: file count, size, duration, errors |
+|  **Comprehensive Logging** | All activities are recorded to a daily log file |
+|  **Task Scheduler** | Setup daily/weekly/monthly automated backups |
+|  **Error Handling** | Handles errors gracefully without crashing |
+|  **Multi-PC** | Suitable for office PCs, personal laptops, or servers |
 
 ---
 
