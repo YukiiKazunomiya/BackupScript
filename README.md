@@ -367,7 +367,7 @@ Please include credits if you use it.
 
 <div align="center">
 
-**Made with ❤️ by YukiiKazunomiya**  
-*Automated backups = safe data = sound sleep* 💤
+**@YukiiKazunomiya**  
+*Automated backups*
 
 </div>
