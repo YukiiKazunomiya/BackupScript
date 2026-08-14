@@ -1,4 +1,4 @@
-# 💾 Backup & Maintenance Automation System
+# Backup & Maintenance Automation System
 
 <div align="center">
 
@@ -16,7 +16,7 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [How it Works](#-how-it-works)
@@ -30,7 +30,7 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 ---
 
-## ✨ Features
+## Features
 
 | Feature | Description |
 |---------|-------------|
@@ -47,7 +47,7 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 ---
 
-## 🔄 How it Works
+## How it Works
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -102,7 +102,7 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - **OS**: Windows 10 / Windows 11
 - **PowerShell**: Version 5.1 or newer (pre-installed on Windows 10/11)
@@ -112,9 +112,9 @@ Backup important data, compress to ZIP, send email notifications — all automat
 
 ---
 
-## 🚀 Installation & Configuration
+## Installation & Configuration
 
-### Method 1: Interactive Setup (Recommended) ⭐
+### Method 1: Interactive Setup (Recommended) 
 
 1. **Download** or clone this repository
 2. **Right-click** `SETUP.ps1` → **"Run with PowerShell"**  
@@ -170,7 +170,7 @@ $Config = @{
 
 ---
 
-## ▶️ How to Run
+## How to Run
 
 ### Run Manually
 
@@ -214,7 +214,7 @@ Or **right-click** `BackupSystem.ps1` → **"Run with PowerShell"**
 
 ---
 
-## ⏰ Automated Backup (Task Scheduler)
+## Automated Backup (Task Scheduler)
 
 ### Via SETUP.ps1 (Recommended)
 
@@ -238,7 +238,7 @@ Register-ScheduledTask -TaskName "BackupSystem" -Action $Action -Trigger $Trigge
 
 ---
 
-## ⚙️ Advanced Configuration
+## Advanced Configuration
 
 ### Adding Custom Backup Folders
 
@@ -273,7 +273,7 @@ The script will still run and the backup will be created, but the email will sim
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```text
 BackupSystem/
@@ -362,7 +362,6 @@ Please include credits if you use it.
 
 <div align="center">
 
-**Made with ❤️ by YukiiKazunomiya**  
-*Automated backups = safe data = sound sleep* 💤
+**@YukiiKazunomiya**  
 
 </div>
